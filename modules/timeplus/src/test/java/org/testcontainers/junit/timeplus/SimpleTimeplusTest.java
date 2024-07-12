@@ -4,8 +4,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.testcontainers.TimeplusImages;
-import org.testcontainers.containers.TimeplusContainer;
 import org.testcontainers.db.AbstractContainerDatabaseTest;
+import org.testcontainers.timeplus.TimeplusContainer;
 import org.testcontainers.utility.DockerImageName;
 
 import java.sql.ResultSet;
