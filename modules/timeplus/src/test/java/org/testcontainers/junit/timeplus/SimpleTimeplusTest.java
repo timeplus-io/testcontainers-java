@@ -24,10 +24,7 @@ public class SimpleTimeplusTest extends AbstractContainerDatabaseTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static Object[][] data() {
-        return new Object[][] { //
-            { TimeplusImages.TIMEPLUS_PROTON_IMAGE },
-            { TimeplusImages.TIMEPLUS_IMAGE },
-        };
+        return new Object[][] { { TimeplusImages.TIMEPLUS_IMAGE } };
     }
 
     @Test

@@ -13,9 +13,11 @@ import java.util.Set;
  */
 public class TimeplusContainer extends JdbcDatabaseContainer<TimeplusContainer> {
 
-    private static final String NAME = "timeplus";
+    static final String NAME = "timeplus";
 
-    private static final DockerImageName TIMEPLUS_IMAGE_NAME = DockerImageName.parse("timeplus/timeplusd:develop");
+    static final String DOCKER_IMAGE_NAME = "timeplus/timeplusd";
+
+    private static final DockerImageName DEFAULT_IMAGE_NAME = DockerImageName.parse("timeplus/timeplusd:develop");
 
     private static final Integer HTTP_PORT = 3218;
 
@@ -29,9 +31,9 @@ public class TimeplusContainer extends JdbcDatabaseContainer<TimeplusContainer> 
 
     private String databaseName = "default";
 
-    private String username = "proton";
+    private String username = "default";
 
-    private String password = "proton@t+";
+    private String password = "";
 
     public TimeplusContainer(String dockerImageName) {
         this(DockerImageName.parse(dockerImageName));
@@ -39,7 +41,7 @@ public class TimeplusContainer extends JdbcDatabaseContainer<TimeplusContainer> 
 
     public TimeplusContainer(final DockerImageName dockerImageName) {
         super(dockerImageName);
-        dockerImageName.assertCompatibleWith(TIMEPLUS_IMAGE_NAME);
+        dockerImageName.assertCompatibleWith(DEFAULT_IMAGE_NAME);
 
         addExposedPorts(HTTP_PORT, NATIVE_PORT);
         this.waitStrategy =
