@@ -5,7 +5,7 @@ import org.testcontainers.containers.JdbcDatabaseContainerProvider;
 import org.testcontainers.utility.DockerImageName;
 
 /**
- * Factory for TiDB containers.
+ * Factory for Timeplus containers.
  */
 public class TimeplusContainerProvider extends JdbcDatabaseContainerProvider {
 
