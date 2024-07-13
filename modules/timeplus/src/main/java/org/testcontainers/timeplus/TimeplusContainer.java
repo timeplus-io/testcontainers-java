@@ -15,9 +15,9 @@ public class TimeplusContainer extends JdbcDatabaseContainer<TimeplusContainer> 
 
     private static final String NAME = "timeplus";
 
-    private static final DockerImageName TIMEPLUS_IMAGE_NAME = DockerImageName.parse("timeplus/timeplusd:2.3.3");
+    private static final DockerImageName TIMEPLUS_IMAGE_NAME = DockerImageName.parse("timeplus/timeplusd:develop");
 
-    private static final Integer HTTP_PORT = 3128;
+    private static final Integer HTTP_PORT = 3218;
 
     private static final Integer NATIVE_PORT = 8463;
 
@@ -43,11 +43,7 @@ public class TimeplusContainer extends JdbcDatabaseContainer<TimeplusContainer> 
 
         addExposedPorts(HTTP_PORT, NATIVE_PORT);
         this.waitStrategy =
-            Wait
-                .forHttp("/")
-                .forStatusCode(200)
-                .forResponsePredicate("Ok."::equals)
-                .withStartupTimeout(Duration.ofMinutes(1));
+            Wait.forHttp("/timeplusd/v1/ping").forStatusCode(200).withStartupTimeout(Duration.ofMinutes(1));
     }
 
     @Override
@@ -73,7 +69,7 @@ public class TimeplusContainer extends JdbcDatabaseContainer<TimeplusContainer> 
             JDBC_URL_PREFIX +
             getHost() +
             ":" +
-            getMappedPort(HTTP_PORT) +
+            getMappedPort(NATIVE_PORT) +
             "/" +
             this.databaseName +
             constructUrlParameters("?", "&")
